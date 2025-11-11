@@ -1,0 +1,21 @@
+{
+  "name": "com.ritsukage.duckov-custom-model-tools",
+  "version": "1.0.0",
+  "displayName": "Duckov Custom Model Tools",
+  "description": "Unity Editor tools for building Mod DLLs and AssetBundles for Duckov game",
+  "unity": "2020.3",
+  "unityRelease": "0f1",
+  "keywords": [
+    "editor",
+    "tools",
+    "modding",
+    "duckov"
+  ],
+  "author": {
+    "name": "OLC",
+    "email": "utsumabo@ritsukage.com"
+  },
+  "type": "tool",
+  "hideInEditor": false
+}
+
