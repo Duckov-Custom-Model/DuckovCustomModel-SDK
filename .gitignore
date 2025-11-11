@@ -1,13 +1,8 @@
 # Unity Package: .meta files should be committed
-# But user settings should not be committed
+# But build artifacts should not be committed
 *.csproj
 *.sln
 *.userprefs
-
-# User settings (should not be committed)
-UserSettings/
-Editor/GamePathSettings.asset
-Editor/GamePathSettings.asset.meta
 
 # OS files
 .DS_Store

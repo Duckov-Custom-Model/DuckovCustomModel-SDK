@@ -7,50 +7,14 @@ using UnityEngine;
 
 namespace DuckovCustomModelTools
 {
-    [Serializable]
-    public class GamePathSettings : ScriptableObject
+    public static class GamePathSettings
     {
-        private static GamePathSettings _instance;
-        [SerializeField] private string gameInstallPath = string.Empty;
+        private const string PrefKeyGameInstallPath = "DuckovCustomModelTools.GameInstallPath";
 
-        public string GameInstallPath
+        public static string GameInstallPath
         {
-            get => gameInstallPath;
-            set
-            {
-                gameInstallPath = value;
-                EditorUtility.SetDirty(this);
-            }
-        }
-
-        private static string GetSettingsPath()
-        {
-            var guids = AssetDatabase.FindAssets($"t:{nameof(GamePathSettings)}");
-            if (guids.Length > 0)
-            {
-                var existingPath = AssetDatabase.GUIDToAssetPath(guids[0]);
-                if (!string.IsNullOrEmpty(existingPath)) return existingPath;
-            }
-
-            var settingsDir = "Assets/UserSettings";
-            if (!Directory.Exists(settingsDir)) Directory.CreateDirectory(settingsDir);
-            return Path.Combine(settingsDir, "GamePathSettings.asset").Replace('\\', '/');
-        }
-
-        public static GamePathSettings Instance
-        {
-            get
-            {
-                if (_instance != null) return _instance;
-                var settingsPath = GetSettingsPath();
-                _instance = AssetDatabase.LoadAssetAtPath<GamePathSettings>(settingsPath);
-                if (_instance != null) return _instance;
-                _instance = CreateInstance<GamePathSettings>();
-                AssetDatabase.CreateAsset(_instance, settingsPath);
-                AssetDatabase.SaveAssets();
-
-                return _instance;
-            }
+            get => EditorPrefs.GetString(PrefKeyGameInstallPath, string.Empty);
+            set => EditorPrefs.SetString(PrefKeyGameInstallPath, value);
         }
 
         public static string FindSteamGamePath()
@@ -110,7 +74,7 @@ namespace DuckovCustomModelTools
 
         public static string GetModDirectory()
         {
-            var gamePath = Instance.GameInstallPath;
+            var gamePath = GameInstallPath;
             return string.IsNullOrEmpty(gamePath)
                 ? string.Empty
                 : Path.Combine(gamePath, "Duckov_Data", "Mods").Replace('\\', '/');
@@ -118,7 +82,7 @@ namespace DuckovCustomModelTools
 
         public static string GetModelDirectory()
         {
-            var gamePath = Instance.GameInstallPath;
+            var gamePath = GameInstallPath;
             return string.IsNullOrEmpty(gamePath)
                 ? string.Empty
                 : Path.Combine(gamePath, "ModConfigs", "DuckovCustomModel", "Models").Replace('\\', '/');

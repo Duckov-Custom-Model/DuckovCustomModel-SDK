@@ -26,7 +26,7 @@ namespace DuckovCustomModelTools
                 return null;
             }
 
-            var gamePath = GamePathSettings.Instance.GameInstallPath;
+            var gamePath = GamePathSettings.GameInstallPath;
             if (string.IsNullOrEmpty(gamePath))
             {
                 EditorUtility.DisplayDialog("错误", "请先设置游戏安装路径。", "确定");
@@ -191,7 +191,7 @@ namespace {name}
         {
             if (!Directory.Exists(outputPath)) Directory.CreateDirectory(outputPath);
 
-            var gamePath = GamePathSettings.Instance.GameInstallPath;
+            var gamePath = GamePathSettings.GameInstallPath;
             var duckovPath = gamePath.Replace('/', '\\');
             var managedPath = Path.Combine(duckovPath, "Duckov_Data", "Managed");
 

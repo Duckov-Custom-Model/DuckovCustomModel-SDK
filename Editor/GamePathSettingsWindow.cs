@@ -6,18 +6,11 @@ namespace DuckovCustomModelTools
 {
     public class GamePathSettingsWindow : EditorWindow
     {
-        private GamePathSettings _pathSettings;
-
         [MenuItem("Duckov Custom Model/游戏路径设置")]
         public static void ShowWindow()
         {
             var window = GetWindow<GamePathSettingsWindow>("游戏路径设置");
             window.Show();
-        }
-
-        private void OnEnable()
-        {
-            _pathSettings = GamePathSettings.Instance;
         }
 
         private void OnGUI()
@@ -32,8 +25,8 @@ namespace DuckovCustomModelTools
                     var foundPath = GamePathSettings.FindSteamGamePath();
                     if (!string.IsNullOrEmpty(foundPath))
                     {
-                        _pathSettings.GameInstallPath = foundPath.Replace('\\', '/');
-                        EditorUtility.DisplayDialog("成功", $"已找到游戏路径:\n{_pathSettings.GameInstallPath}", "确定");
+                        GamePathSettings.GameInstallPath = foundPath.Replace('\\', '/');
+                        EditorUtility.DisplayDialog("成功", $"已找到游戏路径:\n{GamePathSettings.GameInstallPath}", "确定");
                     }
                     else
                     {
@@ -43,10 +36,10 @@ namespace DuckovCustomModelTools
             }
             if (GUILayout.Button("浏览..."))
             {
-                var path = EditorUtility.OpenFolderPanel("选择游戏安装目录", _pathSettings.GameInstallPath, "");
+                var path = EditorUtility.OpenFolderPanel("选择游戏安装目录", GamePathSettings.GameInstallPath, "");
                 if (!string.IsNullOrEmpty(path))
                 {
-                    _pathSettings.GameInstallPath = path.Replace('\\', '/');
+                    GamePathSettings.GameInstallPath = path.Replace('\\', '/');
                 }
             }
             EditorGUILayout.EndHorizontal();
@@ -59,7 +52,7 @@ namespace DuckovCustomModelTools
             EditorGUILayout.Space();
 
             EditorGUILayout.LabelField("游戏安装路径:");
-            EditorGUILayout.LabelField(string.IsNullOrEmpty(_pathSettings.GameInstallPath) ? "未设置" : _pathSettings.GameInstallPath,
+            EditorGUILayout.LabelField(string.IsNullOrEmpty(GamePathSettings.GameInstallPath) ? "未设置" : GamePathSettings.GameInstallPath,
                 EditorStyles.wordWrappedLabel);
 
             EditorGUILayout.Space();
