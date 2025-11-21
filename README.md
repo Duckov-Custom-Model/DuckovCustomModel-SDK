@@ -15,7 +15,7 @@ Unity Editor 工具集，用于为 Duckov 游戏构建 Mod DLL 和 AssetBundle�
 1. 在 Unity 中打开 Package Manager
 2. 点击左上角的 `+` 按钮
 3. 选择 "Add package from git URL"
-4. 输入仓库的 Git URL：`https://github.com/BAKAOLC/duckov-custom-model-tools.git`
+4. 输入仓库的 Git URL：`https://github.com/Duckov-Custom-Model/DuckovCustomModel-SDK.git`
 
 ### 通过本地路径安装
 
