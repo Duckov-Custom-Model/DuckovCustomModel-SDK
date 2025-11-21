@@ -74,9 +74,7 @@ namespace DuckovCustomModelTools.Utils
             {
                 data.Array.DeleteArrayElementAtIndex(selected);
                 --selected;
-                var onSelect = data.OnSelect;
-                if (onSelect != null)
-                    onSelect(data.Array, selected);
+                data.OnSelect?.Invoke(data.Array, selected);
             }
 
             EditorGUI.EndDisabledGroup();
