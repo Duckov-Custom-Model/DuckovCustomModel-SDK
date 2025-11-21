@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace DuckovCustomModelTools
+namespace DuckovCustomModelTools.Windows
 {
     [Flags]
     public enum PlatformFlags

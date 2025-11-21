@@ -5,7 +5,7 @@ using Microsoft.Win32;
 using UnityEditor;
 using UnityEngine;
 
-namespace DuckovCustomModelTools
+namespace DuckovCustomModelTools.Utils
 {
     public static class GamePathSettings
     {

@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace DuckovCustomModelTools
+namespace DuckovCustomModelTools.Utils
 {
     public static class BuildModDll
     {

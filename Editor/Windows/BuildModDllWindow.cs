@@ -1,9 +1,10 @@
 using System;
 using System.IO;
+using DuckovCustomModelTools.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace DuckovCustomModelTools
+namespace DuckovCustomModelTools.Windows
 {
     public class BuildModDllWindow : EditorWindow
     {

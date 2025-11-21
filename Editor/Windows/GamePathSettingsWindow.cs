@@ -1,25 +1,17 @@
-using System.IO;
+using DuckovCustomModelTools.Utils;
 using UnityEditor;
 using UnityEngine;
 
-namespace DuckovCustomModelTools
+namespace DuckovCustomModelTools.Windows
 {
     public class GamePathSettingsWindow : EditorWindow
     {
-        [MenuItem("Duckov Custom Model/游戏路径设置")]
-        public static void ShowWindow()
-        {
-            var window = GetWindow<GamePathSettingsWindow>("游戏路径设置");
-            window.Show();
-        }
-
         private void OnGUI()
         {
             EditorGUILayout.LabelField("游戏安装目录设置", EditorStyles.boldLabel);
-            
+
             EditorGUILayout.BeginHorizontal();
             if (Application.platform == RuntimePlatform.WindowsEditor)
-            {
                 if (GUILayout.Button("自动查找"))
                 {
                     var foundPath = GamePathSettings.FindSteamGamePath();
@@ -33,15 +25,13 @@ namespace DuckovCustomModelTools
                         EditorUtility.DisplayDialog("未找到", "无法自动找到游戏路径，请手动设置。", "确定");
                     }
                 }
-            }
+
             if (GUILayout.Button("浏览..."))
             {
                 var path = EditorUtility.OpenFolderPanel("选择游戏安装目录", GamePathSettings.GameInstallPath, "");
-                if (!string.IsNullOrEmpty(path))
-                {
-                    GamePathSettings.GameInstallPath = path.Replace('\\', '/');
-                }
+                if (!string.IsNullOrEmpty(path)) GamePathSettings.GameInstallPath = path.Replace('\\', '/');
             }
+
             EditorGUILayout.EndHorizontal();
 
             EditorGUILayout.Space();
@@ -52,7 +42,8 @@ namespace DuckovCustomModelTools
             EditorGUILayout.Space();
 
             EditorGUILayout.LabelField("游戏安装路径:");
-            EditorGUILayout.LabelField(string.IsNullOrEmpty(GamePathSettings.GameInstallPath) ? "未设置" : GamePathSettings.GameInstallPath,
+            EditorGUILayout.LabelField(
+                string.IsNullOrEmpty(GamePathSettings.GameInstallPath) ? "未设置" : GamePathSettings.GameInstallPath,
                 EditorStyles.wordWrappedLabel);
 
             EditorGUILayout.Space();
@@ -72,6 +63,12 @@ namespace DuckovCustomModelTools
             EditorGUILayout.Space();
             EditorGUILayout.HelpBox("设置游戏安装目录后，Mod 可以自动复制到游戏目录。", MessageType.Info);
         }
+
+        [MenuItem("Duckov Custom Model/游戏路径设置")]
+        public static void ShowWindow()
+        {
+            var window = GetWindow<GamePathSettingsWindow>("游戏路径设置");
+            window.Show();
+        }
     }
 }
-
