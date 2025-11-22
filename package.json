@@ -1,6 +1,6 @@
 {
   "name": "com.ritsukage.duckov-custom-model-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "displayName": "Duckov Custom Model SDK",
   "description": "A set of tools to help you create and import custom models into Duckov.",
   "unity": "2020.3",
