@@ -33,7 +33,8 @@ namespace DuckovCustomModelTools.Utils
                 return null;
             }
 
-            var tempProjectPath = Path.Combine(Application.temporaryCachePath, $"ModBuild_{name}");
+            var projectRoot = Directory.GetParent(Application.dataPath).FullName;
+            var tempProjectPath = Path.Combine(projectRoot, "Temp", $"ModBuild_{name}");
             if (Directory.Exists(tempProjectPath)) Directory.Delete(tempProjectPath, true);
 
             Directory.CreateDirectory(tempProjectPath);
@@ -277,7 +278,8 @@ namespace {name}
 
             var sourceFile = Path.Combine(projectPath, "ModBehaviour.cs");
             var dllPath = Path.Combine(outputPath, $"{name}.dll");
-            var logPath = Path.Combine(Application.temporaryCachePath, $"ModBuild_{name}_compile.log");
+            var projectRoot = Directory.GetParent(Application.dataPath).FullName;
+            var logPath = Path.Combine(projectRoot, "Temp", $"ModBuild_{name}_compile.log");
 
             var compilerInfo = GetUnityCompilerPath();
             if (compilerInfo == null)

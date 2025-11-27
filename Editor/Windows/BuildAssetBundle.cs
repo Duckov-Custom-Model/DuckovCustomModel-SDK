@@ -96,7 +96,8 @@ namespace DuckovCustomModelTools.Windows
             if (string.IsNullOrEmpty(path)) return;
 
             var bundleFileName = Path.GetFileName(path);
-            var outputDir = Path.Combine(Application.temporaryCachePath, "AssetBundleBuild");
+            var projectRoot = Directory.GetParent(Application.dataPath).FullName;
+            var outputDir = Path.Combine(projectRoot, "Temp", "AssetBundleBuild");
             if (!Directory.Exists(outputDir)) Directory.CreateDirectory(outputDir);
 
             var assetNames = validPrefabs.Select(AssetDatabase.GetAssetPath).ToArray();
