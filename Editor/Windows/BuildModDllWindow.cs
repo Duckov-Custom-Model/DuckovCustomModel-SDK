@@ -37,7 +37,17 @@ namespace DuckovCustomModelTools.Windows
             EditorGUILayout.LabelField("预览图 (可选)", EditorStyles.label);
             if (GUILayout.Button("选择文件...", GUILayout.MaxWidth(100)))
             {
-                var path = EditorUtility.OpenFilePanel("选择预览图", "", "png,jpg,jpeg");
+                var originalCwd = Directory.GetCurrentDirectory();
+                string path;
+                try
+                {
+                    path = EditorUtility.OpenFilePanel("选择预览图", "", "png,jpg,jpeg");
+                }
+                finally
+                {
+                    Directory.SetCurrentDirectory(originalCwd);
+                }
+
                 if (!string.IsNullOrEmpty(path)) _previewImagePath = path;
             }
 
@@ -88,7 +98,17 @@ namespace DuckovCustomModelTools.Windows
 
         private void GenerateMod()
         {
-            var path = EditorUtility.OpenFolderPanel("选择输出目录", "", "");
+            var originalCwd = Directory.GetCurrentDirectory();
+            string path;
+            try
+            {
+                path = EditorUtility.OpenFolderPanel("选择输出目录", "", "");
+            }
+            finally
+            {
+                Directory.SetCurrentDirectory(originalCwd);
+            }
+
             if (string.IsNullOrEmpty(path)) return;
             var outputPath = Path.Combine(path, _name).Replace('\\', '/');
             if (!Directory.Exists(outputPath)) Directory.CreateDirectory(outputPath);

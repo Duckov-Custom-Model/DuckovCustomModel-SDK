@@ -91,8 +91,18 @@ namespace DuckovCustomModelTools.Windows
             if ((_selectedPlatforms & PlatformFlags.Linux) != 0) buildTarget |= BuildTarget.StandaloneLinux64;
             if ((_selectedPlatforms & PlatformFlags.Mac) != 0) buildTarget |= BuildTarget.StandaloneOSX;
 
-            var path = EditorUtility.SaveFilePanel("保存模型 Bundle", "",
-                string.IsNullOrEmpty(_bundleName) ? "duckov_model_bundle" : _bundleName, "unity3d");
+            var originalCwd = Directory.GetCurrentDirectory();
+            string path;
+            try
+            {
+                path = EditorUtility.SaveFilePanel("保存模型 Bundle", "",
+                    string.IsNullOrEmpty(_bundleName) ? "duckov_model_bundle" : _bundleName, "unity3d");
+            }
+            finally
+            {
+                Directory.SetCurrentDirectory(originalCwd);
+            }
+
             if (string.IsNullOrEmpty(path)) return;
 
             var bundleFileName = Path.GetFileName(path);

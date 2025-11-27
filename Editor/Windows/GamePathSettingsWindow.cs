@@ -1,3 +1,4 @@
+using System.IO;
 using DuckovCustomModelTools.Utils;
 using UnityEditor;
 using UnityEngine;
@@ -28,7 +29,17 @@ namespace DuckovCustomModelTools.Windows
 
             if (GUILayout.Button("浏览..."))
             {
-                var path = EditorUtility.OpenFolderPanel("选择游戏安装目录", GamePathSettings.GameInstallPath, "");
+                var originalCwd = Directory.GetCurrentDirectory();
+                string path;
+                try
+                {
+                    path = EditorUtility.OpenFolderPanel("选择游戏安装目录", GamePathSettings.GameInstallPath, "");
+                }
+                finally
+                {
+                    Directory.SetCurrentDirectory(originalCwd);
+                }
+
                 if (!string.IsNullOrEmpty(path)) GamePathSettings.GameInstallPath = path.Replace('\\', '/');
             }
 
